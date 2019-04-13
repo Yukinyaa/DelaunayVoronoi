@@ -18,8 +18,14 @@ namespace DelaunayVoronoi
         }
         static public Point WeightedMidPoint(Point a, Point b)
         {
-            double x = (a.X * a.W + b.X * b.W) / (a.W + b.W);
-            double y = (a.Y * a.W + b.Y * b.W) / (a.W + b.W);
+            if (a.W == 0 && b.W == 0)
+            {
+                double xx = (a.X + b.X) / 2;
+                double yy = (a.Y + b.Y) / 2;
+                return new Point(xx, yy);
+            }
+            double x = (a.X * b.W + b.X * a.W) / (a.W + b.W);
+            double y = (a.Y * b.W + b.Y * a.W) / (a.W + b.W);
             return new Point(x,y);
         }
         //public Point

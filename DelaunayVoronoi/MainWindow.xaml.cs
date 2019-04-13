@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#define DEBUG
+
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Shapes;
@@ -14,7 +16,7 @@ namespace DelaunayVoronoi
         {
             InitializeComponent();
 
-            var points = delaunay.GeneratePoints(6, 800, 400);
+            var points = delaunay.GeneratePoints(100, 800, 400);
 
             var delaunayTimer = Stopwatch.StartNew();
             var triangulation = delaunay.BowyerWatson(points);
@@ -92,7 +94,7 @@ namespace DelaunayVoronoi
                 edges.Add(new Edge(triangle.Vertices[0], triangle.Vertices[1]));
                 edges.Add(new Edge(triangle.Vertices[1], triangle.Vertices[2]));
                 edges.Add(new Edge(triangle.Vertices[2], triangle.Vertices[0]));
-
+#if DEBUG
                 DrawPoint(Point.WeightedMidPoint(triangle.Vertices[0], triangle.Vertices[1]), System.Windows.Media.Brushes.Blue, 3);
 
                 var pa = triangle.Vertices[0];
@@ -103,8 +105,8 @@ namespace DelaunayVoronoi
                 else if (pc.W < pa.W)
                 { var tmp = pa; pa = pc; pc = tmp; }
 
-                var m1 = (pb.X - pa.X) / (pb.Y - pa.Y);
-                var m2 = (pc.X - pa.X) / (pc.Y - pa.Y);
+                var m1 = -(pb.X - pa.X) / (pb.Y - pa.Y);
+                var m2 = -(pc.X - pa.X) / (pc.Y - pa.Y);
 
                 var ab = Point.WeightedMidPoint(pa, pb);
                 var ac = Point.WeightedMidPoint(pa, pc);
@@ -116,14 +118,12 @@ namespace DelaunayVoronoi
                 if (double.IsInfinity(m1)) { a1 = 1; b1 = 0.000001; c1 = -ab.X; }
                 else {
                     a1 = m1; b1 = -1; c1 = -ab.X * m1 + ab.Y;
-                    DrawPoint(triangle.Circumcenter, System.Windows.Media.Brushes.Cyan, 3);
+                    DrawLine(ab,new Point(ab.X+10,ab.Y+m1*10), System.Windows.Media.Brushes.Cyan);
                 }
 
                 if (double.IsInfinity(m2)) { a2 = 1; b2 = 0.000001; c2 = -ac.X; }
                 else { a2 = m2; b2 = -1; c2 = -ac.X * m2 + ac.Y; }
-                
-
-
+#endif
 
                 DrawPoint(triangle.Circumcenter,System.Windows.Media.Brushes.Cyan, 3);
 

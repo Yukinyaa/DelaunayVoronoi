@@ -36,6 +36,33 @@ namespace DelaunayVoronoi
             return points;
         }
 
+        public IEnumerable<Point> GenerateWeightedPoints(int amount, double maxX, double maxY)
+        {
+            MaxX = maxX;
+            MaxY = maxY;
+
+            // TODO make more beautiful
+            var point0 = new Point(0, 0, 0);
+            var point1 = new Point(0, MaxY, 0);
+            var point2 = new Point(MaxX, MaxY, 0);
+            var point3 = new Point(MaxX, 0, 0);
+            var points = new List<Point>() { point0, point1, point2, point3 };
+            var tri1 = new Triangle(point0, point1, point2);
+            var tri2 = new Triangle(point0, point2, point3);
+            border = new List<Triangle>() { tri1, tri2 };
+
+            var random = new Random();
+            for (int i = 0; i < amount - 4; i++)
+            {
+                var pointX = random.NextDouble() * MaxX;
+                var pointY = random.NextDouble() * MaxY;
+                var pointW = random.NextDouble() * 9 + 1;
+                points.Add(new Point(pointX, pointY, pointW));
+            }
+
+            return points;
+        }
+
         public IEnumerable<Triangle> BowyerWatson(IEnumerable<Point> points)
         {
             //var supraTriangle = GenerateSupraTriangle();

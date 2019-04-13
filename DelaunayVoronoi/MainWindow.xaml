@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DelaunayVoronoi"
         mc:Ignorable="d"
-        Title="MainWindow" Height="480" Width="850">
-    <Canvas Name="Canvas" Margin="20,20,20,20" />
+        Title="MainWindow" Height="600" Width="1000">
+    <Canvas Name="Canvas" Margin="100,100,100,100" />
 </Window>

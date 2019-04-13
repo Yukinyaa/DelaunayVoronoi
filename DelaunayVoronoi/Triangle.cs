@@ -86,8 +86,8 @@ namespace DelaunayVoronoi
                 else if (pc.W < pa.W)
                 { var tmp = pa; pa = pc; pc = tmp; }
 
-                var m1 = (pb.X - pa.X) / (pb.Y - pa.Y);
-                var m2 = (pc.X - pa.X) / (pc.Y - pa.Y);
+                var m1 = -(pb.X - pa.X) / (pb.Y - pa.Y);
+                var m2 = -(pc.X - pa.X) / (pc.Y - pa.Y);
 
                 var ab = Point.WeightedMidPoint(pa, pb);
                 var ac = Point.WeightedMidPoint(pa, pc);
