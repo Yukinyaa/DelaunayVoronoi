@@ -11,7 +11,7 @@ namespace DelaunayVoronoi
             {
                 foreach (var neighbor in triangle.TrianglesWithSharedEdge)
                 {
-                    var edge = new Edge(triangle.Circumcenter, neighbor.Circumcenter);
+                    var edge = new Edge(triangle.WeightedCenter, neighbor.WeightedCenter);
                     voronoiEdges.Add(edge);
                 }
             }
