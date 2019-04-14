@@ -111,17 +111,17 @@ namespace DelaunayVoronoi
                 var ab = Point.WeightedMidPoint(pa, pb);
                 var ac = Point.WeightedMidPoint(pa, pc);
 
+
+                float a1, b1, c1;
+                float a2, b2, c2;
                 
-                double a1, b1, c1;
-                double a2, b2, c2;
-                
-                if (double.IsInfinity(m1)) { a1 = 1; b1 = 0.000001; c1 = -ab.X; }
+                if (double.IsInfinity(m1)) { a1 = 1; b1 = 0.000001f; c1 = -ab.X; }
                 else {
                     a1 = m1; b1 = -1; c1 = -ab.X * m1 + ab.Y;
                     DrawLine(ab,new Point(ab.X+10,ab.Y+m1*10), System.Windows.Media.Brushes.Cyan);
                 }
 
-                if (double.IsInfinity(m2)) { a2 = 1; b2 = 0.000001; c2 = -ac.X; }
+                if (double.IsInfinity(m2)) { a2 = 1; b2 = 0.000001f; c2 = -ac.X; }
                 else { a2 = m2; b2 = -1; c2 = -ac.X * m2 + ac.Y; }
 #endif
 
